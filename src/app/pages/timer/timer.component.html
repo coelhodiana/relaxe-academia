@@ -1,0 +1,36 @@
+
+  <div class="container">
+    <span>série</span>
+    <h1>{{ seriesCount }}</h1>
+  </div>
+
+  <div class="container" *ngIf="resting">
+
+    <div class="scroll-left">
+      <p>
+        RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE...
+        RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE...
+      </p>
+    </div>
+
+    <h1>{{ timer$ | async }}</h1>
+  </div>
+
+
+  <div class="form" class="container" *ngIf="!resting">
+    <form [formGroup]="form">
+      <mat-form-field class="form__input">
+        <mat-label>duração do descanso</mat-label>
+        <input matInput placeholder="duração" formControlName="duration" />
+        <span matTextSuffix>segundos</span>
+      </mat-form-field>
+    </form>
+
+    <button mat-fab extended color="primary" (click)="startRest()">
+      descançar
+    </button>
+  </div>
+
+<div *ngIf="!resting" class="container">
+  <a mat-button (click)="resetSeries()">reiniciar série</a>
+</div>
