@@ -45,6 +45,7 @@
     "@types/jest": "^29.2.5",
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
+    "angular-cli-ghpages": "^1.0.5",
     "commitizen": "^4.2.6",
     "cypress": "latest",
     "cz-conventional-changelog": "^3.3.0",
