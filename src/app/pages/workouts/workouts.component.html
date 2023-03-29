@@ -1,0 +1,13 @@
+<section *ngIf="trains$ | async as trains">
+  <div *ngFor="let train of trains; let i = index">
+    <mat-accordion>
+      <mat-expansion-panel [hideToggle]="false" class="card">
+        <mat-expansion-panel-header>Treino {{ i + 1 }}</mat-expansion-panel-header>
+        <div *ngFor="let item of train">
+          <mat-divider></mat-divider>
+          <app-exercise [exercise]="item"></app-exercise>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</section>

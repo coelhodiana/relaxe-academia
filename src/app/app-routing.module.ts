@@ -4,13 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: '/timer'
-  },
-  {
-    path: 'timer',
     loadComponent: () =>
       import('./pages/timer/timer.component').then((mod) => mod.TimerComponent),
+  },
+  {
+    path: 'treinos',
+    loadChildren: () =>
+      import('./pages/workouts/workouts.module').then((m) => m.WorkoutsModule),
   },
 ];
 

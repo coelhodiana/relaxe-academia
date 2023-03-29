@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { scan, takeWhile, timer } from 'rxjs';
 
 import { SharedModule } from './../../shared/shared.module';
@@ -10,15 +10,18 @@ import { SharedModule } from './../../shared/shared.module';
   selector: 'app-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss'],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    SharedModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, SharedModule],
 })
-export class TimerComponent {
+export class TimerComponent implements OnInit {
   form = this.fb.group({
-    duration: 100,
+    duration: [
+      100,
+      [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.pattern('^[0-9]*$'),
+      ],
+    ],
   });
 
   resting = false;
@@ -27,7 +30,15 @@ export class TimerComponent {
 
   timer$: any;
 
+  inputFocused = false;
+
+  @ViewChild('inputDuration') inputDuration!: ElementRef;
+
   constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+
+  }
 
   startRest() {
     this.resting = true;
@@ -41,12 +52,16 @@ export class TimerComponent {
 
     setTimeout(() => {
       this.resting = false;
-    }, duration * 1000)
+    }, duration * 1000);
 
     this.seriesCount++;
   }
 
   resetSeries() {
     this.seriesCount = 1;
+  }
+
+  edit() {
+    this.inputDuration.nativeElement.focus();
   }
 }

@@ -1,0 +1,12 @@
+<div class="exercise" *ngIf="exercise">
+  <h2>{{ exercise.nome }}</h2>
+  <p>{{ exercise.repeticoes }}</p>
+  <p>{{ exercise.descanso }}</p>
+  <p>{{ exercise.descricao }}</p>
+  <video width="400" height="300" controls [muted]="true">
+    <source
+      src="http://34.202.235.236:1337{{ exercise.url }}"
+      type="video/mp4"
+    />
+  </video>
+</div>

@@ -1,36 +1,66 @@
-
-  <div class="container">
+<div class="container">
+  <div class="serie">
     <span>série</span>
-    <h1>{{ seriesCount }}</h1>
+    <h1 class="serie__title">{{ seriesCount }}</h1>
   </div>
 
-  <div class="container" *ngIf="resting">
+  <div class="timer" *ngIf="resting">
+    <span>{{ timer$ | async }}</span>
+  </div>
 
-    <div class="scroll-left">
-      <p>
-        RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE...
-        RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE... RELAXE...
-      </p>
+  <div class="form" class="" *ngIf="!resting">
+    <button (click)="startRest()" class="rest-button">DESCANSAR</button>
+  </div>
+
+  <div class="actions">
+    <button
+      (click)="resetSeries()"
+      class="action-button"
+      title="reiniciar série"
+      *ngIf="!resting"
+    >
+      <img src="assets/icons/stop-fill.svg" alt="" srcset="" />
+    </button>
+
+    <div class="duration" *ngIf="!resting" (click)="edit()">
+      <form [formGroup]="form">
+        <input
+          type="number"
+          formControlName="duration"
+          class="duration__input"
+          #inputDuration
+        />
+      </form>
+
+      <button
+        (click)="resetSeries()"
+        class="action-button"
+        title="editar duração"
+      >
+        <img
+          src="assets/icons/timer-flash-fill.svg"
+          alt=""
+          srcset=""
+        />
+      </button>
     </div>
 
-    <h1>{{ timer$ | async }}</h1>
-  </div>
+    <button
+      (click)="resetSeries()"
+      class="action-button"
+      title="pausar descanso"
+      *ngIf="resting"
+    >
+      <img src="assets/icons/pause-fill.svg" alt="" srcset="" />
+    </button>
 
-
-  <div class="form" class="container" *ngIf="!resting">
-    <form [formGroup]="form">
-      <mat-form-field class="form__input">
-        <mat-label>duração do descanso</mat-label>
-        <input matInput placeholder="duração" formControlName="duration" />
-        <span matTextSuffix>segundos</span>
-      </mat-form-field>
-    </form>
-
-    <button mat-fab extended color="primary" (click)="startRest()">
-      descansar
+    <button
+      (click)="resetSeries()"
+      class="action-button"
+      title="reiniciar descanso"
+      *ngIf="resting"
+    >
+      <img src="assets/icons/play-fill.svg" alt="" srcset="" />
     </button>
   </div>
-
-<div *ngIf="!resting" class="container">
-  <a mat-button (click)="resetSeries()">reiniciar série</a>
 </div>
