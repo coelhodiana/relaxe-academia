@@ -1,0 +1,37 @@
+<div class="login">
+  <form class="example-form" [formGroup]="formLogin">
+    <H1>Login</H1>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" />
+      <mat-error *ngIf="formLogin.controls['email'].invalid">
+        Digite um E-mail válido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Senha</mat-label>
+      <input type="password" matInput formControlName="password" />
+      <mat-error *ngIf="formLogin.controls['password'].invalid">
+        A senha deve ter pelo menos 6 caracteres.
+      </mat-error>
+    </mat-form-field>
+
+    <p *ngIf="auth.error"  class="login__errorMsg">{{ auth.error }}</p>
+
+    <button
+      mat-fab
+      extended
+      color="primary"
+      (click)="login()"
+      [disabled]="formLogin.invalid"
+    >
+      Entrar
+    </button>
+
+    <button mat-fab extended color="primary" class="login__googleBtn" (click)="auth.googleSignin()">
+      Entrar com Google
+    </button>
+  </form>
+</div>

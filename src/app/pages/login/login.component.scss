@@ -1,0 +1,24 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: .2rem;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    &__errorMsg {
+      color: red;
+      padding-bottom: 1rem;
+    }
+
+    &__googleBtn {
+      margin-top: 1rem;
+    }
+}
